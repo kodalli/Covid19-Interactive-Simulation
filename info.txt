@@ -26,3 +26,62 @@ Github desktop has slow stage times so by committing
 changes in vscode you can greatly increase the
 speed of the git commit then push to origin
 using github desktop.
+
+
+---Django---
+
+Create a django project                                         - django-admin startproject projname
+cd into projname 
+Apply migrations                                                - python manage.py migrate
+Run server                                                      - python manage.py runserver
+Make templates folder with index.html
+
+Go into settings.py -> TEMPLATES -> 'DIRS' add
+str(BASE_DIR.joinpath('templates'))
+
+In urls.py ->import template view
+from django.views.generic import TemplateView
+
+In urls.py -> urlpatters -> add 
+path('', TemplateView.as_view(template_name='index.html'), name='index')
+
+
+---Vuejs---
+
+Make sure nodejs is installed
+cd into djangovue external folder directory
+Install vue cli                                                 - npm install -g @vue/cli 
+Create new vue project                                          - vue create vueprojname
+Pick Vue 3
+Use npm package manager
+cd into vueprojname and run the server                          - npm run serve 
+
+---Connected Django and Vuejs---
+
+Vuejs part:
+make sure cd into vueprojname here
+Need to install webpack-bundle-tracker                          - npm install --save-dev webpack-bundle-tracker@0.4.3
+in vueprojname dir create vue.config.js
+Add minimal example code for the config 
+https://gist.github.com/zaemiel/1bcde7098afceacb1e1f49fb4616bea9
+
+Django part:
+cd out of vueprojname into djangovue external dir               
+Need to install django-webpack-loader                           - pip install django-webpack-loader
+In settings.py -> INSTALLED_APPS -> add 
+'webpack_loader'
+Make sure path is correct
+from django-webpack-loader github page  
+https://github.com/owais/django-webpack-loader
+copy and paste the default configuration into settings.py
+delete 'LOADER_CLASS' line 
+
+In the index.html add 
+{% load render_bundle from webpack_loader %}
+then in header
+{% render_bundle 'app' 'css' %}
+then in body 
+{% render_bundle 'app' 'js' %}
+add mount point, div block with app id
+
+Restart both servers
