@@ -2,7 +2,48 @@ import numpy as np
 import multiprocessing
 
 
-def simulate(initialYoung=(27199, 0, 1), initialElderly=(4800, 0, 0), Vaccines=0, timeSpanDays=120, maxDataPoints=2e6, runs=1):
+def simulate(initialYoung: tuple = (27199, 0, 1), initialElderly: tuple = (4800, 0, 0),
+             Vaccines: int = 0, timeSpanDays: int = 120, maxDataPoints: float = 2e6, runs: int = 1):
+    """
+        Parameters:
+        initialYoung = (healthy young, healthy young free rider, sick young)
+        initialElderly = (healthy elderly, healthy elderly free rider, sick elderly)
+        Vaccines = number of vaccines at time = 0
+        timeSpanDays = time span in days to run the simulation
+        maxDataPoints = number of calculations to be done during the time span
+        runs = number of iterations
+
+        HY  = healthy young
+        HE  = healthy elderly
+        SY  = sick young 
+        SE  = sick elderly 
+        I   = immune
+        V   = vaccines
+        HYF = healthy young free rider "People who refuse to take vaccine"
+        HEF = healthy elderly free rider 
+        D   = dead 
+
+        Equations:
+
+        HY + SY -> 2SY          k0= 1.76e-5 day^-1      r0 = k[0]*HY*SY
+        HY + SE -> SY + SE                              r1 = k[0]*HY*SE
+        HYF + SY -> 2SY                                 r2 = k[0]*HYF*SY
+        HYF + SE -> SY + SE                             r3 = k[0]*HYF*SE
+
+        HE + SY -> SY + SE      k1= 0.88e-5 day^-1      r4 = k[1]*HE*SY
+        HE + SE -> 2SE                                  r5 = k[1]*HE*SE
+        HEF + SY -> SY + SE                             r6 = k[1]*HEF*SY
+        HEF + SE -> 2SE                                 r7 = k[1]*HEF*SE
+
+        SY -> D                 k2= 0.010 day^-1        r8 = k[2]*SY
+        SE -> D                 k3= 0.030 day^-1        r9 = k[3]*SE
+
+        SY -> I                 k4= 0.100 day^-1        r10= k[4]*SY
+        SE -> I                                         r11= k[4]*SE
+
+        HY + V -> I             k5= 3.52e-6 day^-1      r12= k[5]*HY*V
+        HE + V -> I                                     r13= k[5]*HE*V
+    """
     HY0, HYF0, SY0 = initialYoung
     HE0, HEF0, SE0 = initialElderly
     D0, V0, I0 = 0, Vaccines, 0
@@ -122,6 +163,9 @@ def get_r(n, k):
     '''
         Helper function for the Gillespie algorithm.
         Gets the relative reaction probabilites.
+
+        n = count for each element ex: V is number of vaccines
+        k = all the reaction rate constants in days^-1
     '''
     HY, HE, HYF, HEF, SY, SE, D, V, I = n
     r = [
