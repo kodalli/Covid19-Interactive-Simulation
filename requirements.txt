@@ -1,0 +1,3 @@
+numpy
+django
+django-webpack-loader
