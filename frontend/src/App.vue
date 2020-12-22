@@ -1,55 +1,116 @@
 <template>
   <div id="app">
+    <!-- <div class="container"> -->
+    <div class="row">
+      <!-- <div class="col-xs-6"> -->
+      <div class="col-md-6">
 
-    <form @submit.prevent="submitForm">
-      <div class="form-group">
-        <input type="text" class="form-control row mt-3" placeholder="Healthy Young"
-          v-model="simDataAttribute.healthyYoung">
-        <input type="text" class="form-control row mt-3" placeholder="Healthy Young Freerider"
-          v-model="simDataAttribute.healthyYoungFreerider">
-        <input type="text" class="form-control row mt-3" placeholder="Sick Young" v-model="simDataAttribute.sickYoung">
-        <input type="text" class="form-control row mt-3" placeholder="Healthy Elderly"
-          v-model="simDataAttribute.healthyElderly">
-        <input type="text" class="form-control row mt-3" placeholder="Healthy Elderly Freerider"
-          v-model="simDataAttribute.healthyElderlyFreerider">
-        <input type="text" class="form-control row mt-3" placeholder="Sick Elderly"
-          v-model="simDataAttribute.sickElderly">
-        <input type="text" class="form-control row mt-3" placeholder="Vaccines" v-model="simDataAttribute.vaccines">
-        <input type="text" class="form-control row mt-3" placeholder="Time Span (Days)"
-          v-model="simDataAttribute.timeSpan">
-        <button class="btn btn-success row mt-3">Run Simulation</button>
+        <form @submit.prevent="submitForm">
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Healthy Young</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Healthy Young"
+                v-model="simDataAttribute.healthyYoung">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Healthy Young Freerider</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Healthy Young Freerider"
+                v-model="simDataAttribute.healthyYoungFreerider">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Sick Young</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Sick Young"
+                v-model="simDataAttribute.sickYoung">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Healthy Elderly</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Healthy Elderly"
+                v-model="simDataAttribute.healthyElderly">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Healthy Elderly Freerider</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Healthy Elderly Freerider"
+                v-model="simDataAttribute.healthyElderlyFreerider">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Sick Elderly</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Sick Elderly"
+                v-model="simDataAttribute.sickElderly">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Vaccines</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Vaccines"
+                v-model="simDataAttribute.vaccines">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Time Span (Days)</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Time Span (Days)"
+                v-model="simDataAttribute.timeSpan">
+            </div>
+          </div>
+
+          <button class="btn btn-success row mt-3">Run Simulation</button>
+
+        </form>
+
       </div>
-    </form>
 
+      <!-- <div class="col-xs-6"> -->
+      <div class="col-md-6">
 
-    <table class="table">
-      <thead>
-        <th>Healthy Young</th>
-        <th>Healthy Young Freerider</th>
-        <th>Sick Young</th>
-        <th>Healthy Elderly</th>
-        <th>Healthy Elderly Freerider</th>
-        <th>Sick Elderly</th>
-        <th>Vaccines</th>
-        <th>Time Span (Days)</th>
-      </thead>
-      <tbody>
-        <tr v-for="item in simData" :key="item.id" @dblclick="$data.simDataAttribute = item">
-          <td>{{ item.healthyYoung }}</td>
-          <td>{{ item.healthyYoungFreerider }}</td>
-          <td>{{ item.sickYoung }}</td>
-          <td>{{ item.healthyElderly }}</td>
-          <td>{{ item.healthyElderlyFreerider }}</td>
-          <td>{{ item.sickElderly }}</td>
-          <td>{{ item.vaccines }}</td>
-          <td>{{ item.timeSpan }}</td>
-          <td>
-            <button class="btn btn-outline-danger bt-sm mx-1" @click="deleteSimData(item)">del</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <table class="table">
+          <thead>
+            <th>Healthy Young</th>
+            <th>Healthy Young Freerider</th>
+            <th>Sick Young</th>
+            <th>Healthy Elderly</th>
+            <th>Healthy Elderly Freerider</th>
+            <th>Sick Elderly</th>
+            <th>Vaccines</th>
+            <th>Time Span (Days)</th>
+          </thead>
+          <tbody>
+            <tr v-for="item in simData" :key="item.id" @dblclick="$data.simDataAttribute = item">
+              <td>{{ item.healthyYoung }}</td>
+              <td>{{ item.healthyYoungFreerider }}</td>
+              <td>{{ item.sickYoung }}</td>
+              <td>{{ item.healthyElderly }}</td>
+              <td>{{ item.healthyElderlyFreerider }}</td>
+              <td>{{ item.sickElderly }}</td>
+              <td>{{ item.vaccines }}</td>
+              <td>{{ item.timeSpan }}</td>
+              <td>
+                <button class="btn btn-outline-danger bt-sm mx-1" @click="deleteSimData(item)">del</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
