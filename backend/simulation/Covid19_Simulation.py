@@ -6,12 +6,14 @@ def simulate(initialYoung: tuple = (27199, 0, 1), initialElderly: tuple = (4800,
              Vaccines: int = 0, timeSpanDays: int = 120, maxDataPoints: float = 2e6, runs: int = 1):
     """
         Parameters:
+
         initialYoung = (healthy young, healthy young free rider, sick young)
         initialElderly = (healthy elderly, healthy elderly free rider, sick elderly)
         Vaccines = number of vaccines at time = 0
         timeSpanDays = time span in days to run the simulation
         maxDataPoints = number of calculations to be done during the time span
         runs = number of iterations
+
         HY  = healthy young
         HE  = healthy elderly
         SY  = sick young 
@@ -21,7 +23,9 @@ def simulate(initialYoung: tuple = (27199, 0, 1), initialElderly: tuple = (4800,
         HYF = healthy young free rider "People who refuse to take vaccine"
         HEF = healthy elderly free rider 
         D   = dead 
+
         Equations:
+
         HY + SY -> 2SY          k0= 1.76e-5 day^-1      r0 = k[0]*HY*SY
         HY + SE -> SY + SE                              r1 = k[0]*HY*SE
         HYF + SY -> 2SY                                 r2 = k[0]*HYF*SY
@@ -45,6 +49,9 @@ def simulate(initialYoung: tuple = (27199, 0, 1), initialElderly: tuple = (4800,
          3.52e-6]  # day^-1 rate constants
 
     args = [(n0, k, timeSpanDays, maxDataPoints) for _ in range(runs)]
+    # gil_deaths = []
+    # for arg in args:
+    #     gil_deaths.append(gillespie(arg))
     pool = multiprocessing.Pool()
     gil_deaths = pool.map(gillespie, args)
     print(gil_deaths)
@@ -56,6 +63,7 @@ def gillespie(*args):
         of the disease. The reactions are converted to probabilites
         and if the reaction occurs, each element is changed relative
         to the reaction and avoiding fractional changes.
+        
         For example, lets observe the reaction HY + SY -> 2SY. If the
         probability of the reaction is calculated to be 0.5, this
         means there is a 50% chance for this reaction to occur. 
@@ -70,17 +78,20 @@ def gillespie(*args):
         When a healthy person becomes sick, they are subtracted from
         the population of healthy people and added to the population
         of sick people. 
+        
         This model assumes each group has a 1st degree affect on the
         rate of reaction.
+        
         n = [HY, HE, HYF, HEF, SY, SE, D, V, I]
         k = [k0, k1, k2, k3, k4, k5]
     """
+    np.random.seed()
     args = args[0]
-    print(args)
+    # print(args)
     n, k, tSpan, nMax = args[0], args[1], args[2], args[3]
     time = np.zeros(int(nMax))
     t = 0
-    result = np.zeros((int(nMax), 9))
+    result = np.zeros((int(nMax), 9), dtype=np.uint64)
     nV0 = n[7]
     last_val = 0
     vacc = True
@@ -90,7 +101,7 @@ def gillespie(*args):
             vacc = False
 
         r = get_r(n, k)  # rxn proportional probabilities
-        rtot = sum(r)
+        rtot = np.sum(r)
 
         if(rtot == 0 or t >= tSpan):  # stop condition
             last_val = index
@@ -113,12 +124,18 @@ def gillespie(*args):
 
     # stores only results till recorded time index
     res = result.T[:, :last_val]
+
+    keys = ['HY', 'HE', 'HYF', 'HEF', 'SY', 'SE', 'D', 'V', 'I']
+    final_values = {key: val for key, val in zip(keys, res[:, -1])}
+    print(final_values)
+
     return res[6, -1]  # deaths
 
 
 def nvsum(n, rxn_num):
     """
         Helper function, sums the reaction with the current number of items.
+        
         rxn_num = int representing which reaction to apply to the population
         n = [HY, HE, HYF, HEF, SY, SE, D, V, I], these are all the number 
         of each element, HY is number of healthy young people, V is number
@@ -151,11 +168,12 @@ def get_r(n, k):
     '''
         Helper function for the Gillespie algorithm.
         Gets the relative reaction probabilites.
+
         n = count for each element ex: V is number of vaccines
         k = all the reaction rate constants in days^-1
     '''
     HY, HE, HYF, HEF, SY, SE, D, V, I = n
-    r = [
+    r = np.array([
         k[0]*HY*SY,
         k[0]*HY*SE,
         k[0]*HYF*SY,
@@ -170,9 +188,9 @@ def get_r(n, k):
         k[4]*SE,
         k[5]*HY*V,
         k[5]*HE*V
-    ]
+    ])
     return r
 
 
 if __name__ == "__main__":
-    simulate(Vaccines=1000, runs=4)
+    simulate(initialYoung=(27199, 10000, 1500), initialElderly=(4800, 1500, 1000), Vaccines=0, runs=16, timeSpanDays=150)
