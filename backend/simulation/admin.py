@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import SimData
+
+
+admin.site.register(SimData)
+
+# superuser kodali, Nintend0
