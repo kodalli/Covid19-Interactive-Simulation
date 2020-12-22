@@ -1,7 +1,16 @@
 ---Conda Environments---
 
+<<<<<<< Updated upstream
 Specify contents of brand new environment w/ default packages   - conda create -n envname
 Can also specify python version and/or packages                 - conda create -n envname python-3.8 numpy
+=======
+Specify contents of brand new environment w/ default packages   - conda create -n envname python=3.8
+When you create a conda env you have to install pip             - conda install pip
+otherwise pip packages won't show in the env 
+when you create the yml file
+Can also specify python version and/or packages                 - conda create -n envname python=3.8 numpy
+View all conda envs                                             - conda info --envs
+>>>>>>> Stashed changes
 
 Save/Export an environment                                      - conda env export -f environment.yml
 Create/Load an environment                                      - conda env create -f environment.yml
