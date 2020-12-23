@@ -28,3 +28,13 @@ Github desktop has slow stage times so by committing
 changes in vscode you can greatly increase the
 speed of the git commit then push to origin
 using github desktop.
+
+---Setting Up---
+Before running the django server                                - ./manage.py migrate
+make the migrations then run the server                         - ./manage.py runserver 
+
+Before running the vue app make sure node packages              - npm install package.json
+are installed then run the server                               - npm run serve 
+
+can visit http://127.0.0.1:8000/api/simulation/?format=api
+to see all the data in the django backend
