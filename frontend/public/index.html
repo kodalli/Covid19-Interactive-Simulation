@@ -19,7 +19,7 @@
   </noscript>
 
   <!-- As a heading rgb(15, 52, 96) -->
-  <nav class="navbar navbar-dark bg-dark"> 
+  <nav class="navbar navbar-dark bg-dark">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
       data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
       aria-label="Toggle navigation">
@@ -41,13 +41,41 @@
 
   <div class="container">
     <!-- <div class="row"> -->
-      <div class="mx-auto">
-        <div id="app"></div>
-      </div>
+    <div class="mx-auto">
+      <div id="app"></div>
+    </div>
     <!-- </div> -->
   </div>
 
   <!-- built files will be auto injected -->
+  <!-- <div class="container">
+    <canvas id="bar-chart"></canvas>
+  </div> -->
+
 </body>
+
+<!-- <script>
+  // Bar chart
+  new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+        data: [2478, 5267, 734, 784, 433]
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+  });
+</script> -->
 
 </html>

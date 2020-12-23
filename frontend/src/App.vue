@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <my-chart/>
-    <!-- <my-chart :chartdata="chartdata" :options="options"/> -->
-    <!-- <div class="container"> -->
+
+    <!-- <line-chart :data="chartData"></line-chart> -->
+
     <div class="row">
       <!-- <div class="col-xs-6"> -->
       <div class="col-md-6">
@@ -27,8 +27,7 @@
           <div class="form-group row">
             <label for="colFormLabel" class="col-sm-4 col-form-label">Sick Young</label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" placeholder="Sick Young"
-                v-model="simDataAttribute.sickYoung">
+              <input type="text" class="form-control" placeholder="Sick Young" v-model="simDataAttribute.sickYoung">
             </div>
           </div>
 
@@ -51,16 +50,14 @@
           <div class="form-group row">
             <label for="colFormLabel" class="col-sm-4 col-form-label">Sick Elderly</label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" placeholder="Sick Elderly"
-                v-model="simDataAttribute.sickElderly">
+              <input type="text" class="form-control" placeholder="Sick Elderly" v-model="simDataAttribute.sickElderly">
             </div>
           </div>
 
           <div class="form-group row">
             <label for="colFormLabel" class="col-sm-4 col-form-label">Vaccines</label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" placeholder="Vaccines"
-                v-model="simDataAttribute.vaccines">
+              <input type="text" class="form-control" placeholder="Vaccines" v-model="simDataAttribute.vaccines">
             </div>
           </div>
 
@@ -83,14 +80,14 @@
 
         <table class="table">
           <thead>
-            <th>Healthy Young</th>
-            <th>Healthy Young Freerider</th>
-            <th>Sick Young</th>
-            <th>Healthy Elderly</th>
-            <th>Healthy Elderly Freerider</th>
-            <th>Sick Elderly</th>
-            <th>Vaccines</th>
-            <th>Time Span (Days)</th>
+            <th>HY</th>
+            <th>HYF</th>
+            <th>SY</th>
+            <th>HE</th>
+            <th>HEF</th>
+            <th>SE</th>
+            <th>V</th>
+            <th>Days</th>
           </thead>
           <tbody>
             <tr v-for="item in simData" :key="item.id" @dblclick="$data.simDataAttribute = item">
@@ -116,12 +113,17 @@
 </template>
 
 <script>
-import MyChart from './components/MyChart.vue';
+  // import MyChart from '@/components/MyChart';
   export default {
-  components: { MyChart },
     name: 'App',
+    // components: { MyChart },
     data() {
       return {
+        // chartData: {
+        //   '2017-05-13': 2,
+        //   '2017-05-14': 4,
+        //   '2017-05-15': 6,
+        // },
         simDataAttribute: {},
         simData: []
       }
@@ -198,3 +200,4 @@ import MyChart from './components/MyChart.vue';
     margin-top: 60px;
   }
 </style>
+

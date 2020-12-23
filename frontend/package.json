@@ -12,7 +12,8 @@
     "core-js": "^3.6.5",
     "package.json": "^2.0.1",
     "vue": "^3.0.0",
-    "vue-chartjs": "^3.5.1"
+    "vue-chartjs": "^3.5.1",
+    "vue-chartkick": "^0.6.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
