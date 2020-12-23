@@ -9,7 +9,7 @@
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <title>Covid-19 Interactive Simulation</title>
 </head>
 
 <body>
@@ -18,12 +18,33 @@
       Please enable it to continue.</strong>
   </noscript>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-8 mx-auto mt-5">
-        <div id="app"></div>
+  <!-- As a heading rgb(15, 52, 96) -->
+  <nav class="navbar navbar-dark bg-dark"> 
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
+      <a class="navbar-brand" href="#">Covid-19 Interactive Simulation</a>
+      <div class="collapse navbar-collapse mr-auto" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="#">Features</a>
+          <!-- <a class="nav-item nav-link" href="#">Pricing</a>
+          <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+        </div>
       </div>
     </div>
+  </nav>
+
+
+  <div class="container">
+    <!-- <div class="row"> -->
+      <div class="mx-auto">
+        <div id="app"></div>
+      </div>
+    <!-- </div> -->
   </div>
 
   <!-- built files will be auto injected -->

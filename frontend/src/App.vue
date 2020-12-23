@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <my-chart/>
+    <!-- <my-chart :chartdata="chartdata" :options="options"/> -->
     <!-- <div class="container"> -->
     <div class="row">
       <!-- <div class="col-xs-6"> -->
@@ -7,70 +9,70 @@
 
         <form @submit.prevent="submitForm">
           <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Healthy Young</label>
-            <div class="col-sm-10">
+            <label for="colFormLabel" class="col-sm-4 col-form-label">Healthy Young</label>
+            <div class="col-sm-5">
               <input type="text" class="form-control" placeholder="Healthy Young"
                 v-model="simDataAttribute.healthyYoung">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Healthy Young Freerider</label>
-            <div class="col-sm-10">
+            <label for="colFormLabel" class="col-sm-4 col-form-label">Healthy Young Freerider</label>
+            <div class="col-sm-5">
               <input type="text" class="form-control" placeholder="Healthy Young Freerider"
                 v-model="simDataAttribute.healthyYoungFreerider">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Sick Young</label>
-            <div class="col-sm-10">
+            <label for="colFormLabel" class="col-sm-4 col-form-label">Sick Young</label>
+            <div class="col-sm-5">
               <input type="text" class="form-control" placeholder="Sick Young"
                 v-model="simDataAttribute.sickYoung">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Healthy Elderly</label>
-            <div class="col-sm-10">
+            <label for="colFormLabel" class="col-sm-4 col-form-label">Healthy Elderly</label>
+            <div class="col-sm-5">
               <input type="text" class="form-control" placeholder="Healthy Elderly"
                 v-model="simDataAttribute.healthyElderly">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Healthy Elderly Freerider</label>
-            <div class="col-sm-10">
+            <label for="colFormLabel" class="col-sm-4 col-form-label">Healthy Elderly Freerider</label>
+            <div class="col-sm-5">
               <input type="text" class="form-control" placeholder="Healthy Elderly Freerider"
                 v-model="simDataAttribute.healthyElderlyFreerider">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Sick Elderly</label>
-            <div class="col-sm-10">
+            <label for="colFormLabel" class="col-sm-4 col-form-label">Sick Elderly</label>
+            <div class="col-sm-5">
               <input type="text" class="form-control" placeholder="Sick Elderly"
                 v-model="simDataAttribute.sickElderly">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Vaccines</label>
-            <div class="col-sm-10">
+            <label for="colFormLabel" class="col-sm-4 col-form-label">Vaccines</label>
+            <div class="col-sm-5">
               <input type="text" class="form-control" placeholder="Vaccines"
                 v-model="simDataAttribute.vaccines">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Time Span (Days)</label>
-            <div class="col-sm-10">
+            <label for="colFormLabel" class="col-sm-4 col-form-label">Time Span (Days)</label>
+            <div class="col-sm-5">
               <input type="text" class="form-control" placeholder="Time Span (Days)"
                 v-model="simDataAttribute.timeSpan">
             </div>
           </div>
 
-          <button class="btn btn-success row mt-3">Run Simulation</button>
+          <button class="btn btn-outline-dark row mt-3" style="outline">Run Simulation</button>
 
         </form>
 
@@ -114,7 +116,9 @@
 </template>
 
 <script>
+import MyChart from './components/MyChart.vue';
   export default {
+  components: { MyChart },
     name: 'App',
     data() {
       return {
