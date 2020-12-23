@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <!-- <line-chart :data="chartData"></line-chart> -->
+    <column-chart :data="simDataAttribute"></column-chart>
 
     <div class="row">
       <!-- <div class="col-xs-6"> -->
@@ -112,27 +112,19 @@
   <!-- </div> -->
 </template>
 
+
 <script>
-  // import MyChart from '@/components/MyChart';
   export default {
     name: 'App',
-    // components: { MyChart },
     data() {
       return {
-        // chartData: {
-        //   '2017-05-13': 2,
-        //   '2017-05-14': 4,
-        //   '2017-05-15': 6,
-        // },
         simDataAttribute: {},
         simData: []
       }
     },
-
     async created() {
       await this.getSimData();
     },
-
     methods: {
       submitForm() {
         if (this.simDataAttribute.id === undefined) {
@@ -141,15 +133,12 @@
           this.editSimData();
         }
       },
-
       async getSimData() {
         var response = await fetch('http://127.0.0.1:8000/api/simulation/')
         this.simData = await response.json()
       },
-
       async createSimData() {
         await this.getSimData();
-
         await fetch('http://127.0.0.1:8000/api/simulation/', {
           method: 'post',
           headers: {
@@ -159,10 +148,8 @@
         });
         await this.getSimData();
       },
-
       async editSimData() {
         await this.getSimData();
-
         await fetch(`http://127.0.0.1:8000/api/simulation/${this.simDataAttribute.id}/`, {
           method: 'put',
           headers: {
@@ -173,10 +160,8 @@
         await this.getSimData();
         this.simDataAttribute = {};
       },
-
       async deleteSimData(simDataAttribute) {
         await this.getSimData();
-
         await fetch(`http://127.0.0.1:8000/api/simulation/${simDataAttribute.id}/`, {
           method: 'delete',
           headers: {
@@ -200,4 +185,3 @@
     margin-top: 60px;
   }
 </style>
-
