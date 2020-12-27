@@ -8,41 +8,91 @@
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+    google.charts.load('current', {
+      packages: ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+  </script>
   <title>Covid-19 Interactive Simulation</title>
 </head>
 
 <body>
-  <noscript>
-    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
-      Please enable it to continue.</strong>
-  </noscript>
+  <div class="wrap">
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+    </noscript>
 
-   <!-- As a heading rgb(15, 52, 96) -->
-   <nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-      data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
-      <a class="navbar-brand" href="#">Covid-19 Interactive Simulation</a>
-      <div class="collapse navbar-collapse mr-auto" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="#">Features</a>
-          <!-- <a class="nav-item nav-link" href="#">Pricing</a>
-          <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+    <!-- As a heading rgb(15, 52, 96) -->
+    <nav class="navbar navbar-dark bg-dark">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
+        <a class="navbar-brand" href="#">Covid-19 Interactive Simulation</a>
+        <div class="collapse navbar-collapse mr-auto" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Features</a>
+            <!-- <a class="nav-item nav-link" href="#">Pricing</a>
+  <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-  
-  <div class="container">
-    <div class="mx-auto">
-      <div id="app"></div>
+    </nav>
+
+    <div class="container">
+      <div class="mx-auto">
+        <div id="app"></div>
+      </div>
     </div>
   </div>
-  <!-- built files will be auto injected -->
+
+  <footer class="footer">
+    <div></div>
+  </footer>
 </body>
 
 </html>
+
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .wrap {
+    height: auto;
+    margin: 0 auto -80px;
+    /* footer height + space */
+    min-height: 100%;
+    padding: 0 0 80px;
+    /* footer height + space */
+    box-sizing: border-box;
+    overflow: auto;
+  }
+
+  .footer {
+    background-color: #ffffff;
+    color: #ffffff;
+    /* border-top: 1px solid rgb(255, 255, 255); */
+    height: 60px;
+    /* footer height */
+    padding-top: 20px;
+    display: block;
+    margin-top: 30px;
+    /* space between content and footer */
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+  }
+</style>
